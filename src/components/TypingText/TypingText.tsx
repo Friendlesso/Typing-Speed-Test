@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { getRandomText, type DifficultyProps, type Text } from '../../utils/getRandomText';
+import { getWPM } from '../../utils/getWPM';
+
+type TypingTextProps = {
+  setWpm: React.Dispatch<React.SetStateAction<number>>
+}
 
 
 
-export function TypingText({ difficulty }: DifficultyProps) {
+export function TypingText({ difficulty, setWpm }: DifficultyProps & TypingTextProps) {
   const [index, setIndex] = useState(0);
   const [correctChar, setCorrectChar] = useState(0);
   const [errors, setErrors] = useState(0);
+  const [totalChar, setTotalChar] = useState(0);
   const [charStatus, setCharStatus] = useState<Array<'correct' | 'incorrect'>>([]);
 
   const [question, setQuestion] = useState<Text>(getRandomText(difficulty));
@@ -30,13 +36,15 @@ export function TypingText({ difficulty }: DifficultyProps) {
       setCharStatus((prev) => [...prev, 'incorrect'])
       setErrors((error) => error + 1);
     }
-
+    setTotalChar((num) => num + 1)
     setIndex((i) => i + 1);
   }
 
   const characters = question.text.split('');
 
-  console.log(errors, correctChar)
+  if(characters.length === totalChar) {
+    setWpm(getWPM(totalChar, errors, 0.5));
+  }
   return (
     <div>
       <p className='text-white'>
