@@ -5,12 +5,13 @@ import { TypingHud } from "./components/TypingHUD/TypingHUD";
 
 function App() {
   const [wpm, setWpm] = useState(0);
+  const [accuracy, setAccuracy] = useState(0);
 
   return (
     <>
       <Header />
-      <TypingText setWpm={setWpm} difficulty="easy" />
-      <TypingHud wpm={wpm}/>
+      <TypingHud wpm={wpm} accuracy={accuracy} />
+      <TypingText setWpm={setWpm} setAccuracy={setAccuracy} difficulty="easy" />
     </>
   )
 }
