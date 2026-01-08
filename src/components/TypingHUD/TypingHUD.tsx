@@ -10,7 +10,7 @@ export function TypingHud({ wpm, accuracy }: TypingHUDProps) {
 
   return (
     <section className="flex border-b-2 border-(--neutral-700) py-2">
-      <div className="flex gap-3">
+      <div className="flex">
         <WPM wpm={wpm} />
         <Accuracy accuracyNum={accuracy} />
       </div>

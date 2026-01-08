@@ -10,8 +10,17 @@ function App() {
   return (
     <>
       <Header />
-      <TypingHud wpm={wpm} accuracy={accuracy} />
-      <TypingText setWpm={setWpm} setAccuracy={setAccuracy} difficulty="easy" />
+      <div className="flex flex-col mt-16 gap-8">
+        <TypingHud
+          wpm={wpm}
+          accuracy={accuracy}
+        />
+        <TypingText
+          setWpm={setWpm}
+          setAccuracy={setAccuracy}
+          difficulty="easy"
+        />
+      </div>
     </>
   )
 }
