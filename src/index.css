@@ -32,4 +32,5 @@ body {
   font-family: 'Sora', sans-serif;
   background-color: var(--neutral-900);
   padding: 2rem 2rem;
+  min-height: 100dvh;
 }

@@ -1,0 +1,1 @@
+export { WPM } from '../WPM/WPM';

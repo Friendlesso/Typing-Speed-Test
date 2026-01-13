@@ -9,22 +9,26 @@ function App() {
   const [isStarted, setIsStarted] = useState<boolean>(false)
 
   return (
-    <>
+    <div className="flex flex-col max-h-dvh">
       <Header />
-      <div className="flex flex-col mt-16 gap-8">
+      <div className="flex flex-col flex-1 mt-16 gap-8">
         <TypingHud
           wpm={wpm}
           accuracy={accuracy}
           isStarted={isStarted}
           setIsStarted={setIsStarted}
         />
-        <TypingText
-          setWpm={setWpm}
-          setAccuracy={setAccuracy}
-          difficulty="easy"
-        />
+        <div className=" pb-8 border-b-2 border-(--neutral-700) ">
+          <TypingText
+            setWpm={setWpm}
+            setAccuracy={setAccuracy}
+            difficulty="easy"
+            setIsStarted={setIsStarted}
+            isStarted={isStarted}
+          />
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
