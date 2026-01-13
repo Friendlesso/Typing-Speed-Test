@@ -18,11 +18,11 @@ function App() {
           isStarted={isStarted}
           setIsStarted={setIsStarted}
         />
-        <div className=" pb-8 border-b-2 border-(--neutral-700) ">
+        <div>
           <TypingText
             setWpm={setWpm}
             setAccuracy={setAccuracy}
-            difficulty="easy"
+            difficulty="hard"
             setIsStarted={setIsStarted}
             isStarted={isStarted}
           />

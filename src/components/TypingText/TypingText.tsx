@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { getRandomText, type DifficultyProps, type Text } from '../../utils/getRandomText';
 import { getWPM } from '../../utils/getWPM';
 import { getAccuracy } from '../../utils/getAccuracy';
+import { StartTestBtn } from './StartTestBtn';
+import { RestartTestBtn } from './RestartTestBtn';
 
 type TypingTextProps = DifficultyProps & {
   setWpm: React.Dispatch<React.SetStateAction<number>>
@@ -66,52 +68,56 @@ export function TypingText({ difficulty, setWpm, setAccuracy, setIsStarted, isSt
     return '';
   }
   return (
-    <div className='relative'>
-      <div className={`relative flex flex-col items-center ${!isStarted ? 'blur-md' : 'blur-none'}`}>
-        <p className='text-white text-[2.5rem] leading-[136%] tracking-[0.4px] max-w-[90%]'>
-          {characters.map((char, charIndex) => {
-            const status = charStatus[charIndex];
-            let className = getCharClass(charIndex)
-
-            if (charIndex === index) className += ' border-b-2 border-gray-400'
-
-            if (status === 'incorrect') {
-              className += ' border-b-2 border-red-400'
+    <>
+      <div className='relative'>
+        <div className=
+          {`
+          relative 
+          flex flex-col items-center 
+          ${!isStarted
+              ? 'blur-md'
+              : 'blur-none'
             }
+        `}
+        >
+          <p className='text-white text-[2.5rem] leading-[136%] tracking-[0.4px]'>
+            {characters.map((char, charIndex) => {
+              const status = charStatus[charIndex];
+              let className = getCharClass(charIndex)
 
-            return (
-              <span key={charIndex} className={className}>
-                {char}
-              </span>
-            )
-          }
-          )}
-        </p>
-        <input
-          ref={inputRef}
-          type="text"
-          readOnly
-          name='TextInput'
-          onClick={() => {
-            setIsStarted(true)
-          }}
-          onKeyDown={handleKeyDown}
-          className='absolute top-0 left-0 right-0 bottom-0 outline-none cursor-pointer'
+              if (charIndex === index) className += ' border-b-2 border-gray-400'
+
+              if (status === 'incorrect') {
+                className += ' border-b-2 border-red-400'
+              }
+
+              return (
+                <span key={charIndex} className={className}>
+                  {char}
+                </span>
+              )
+            }
+            )}
+          </p>
+          <input
+            ref={inputRef}
+            type="text"
+            readOnly
+            name='TextInput'
+            onClick={() => {
+              setIsStarted(true)
+            }}
+            onKeyDown={handleKeyDown}
+            className='absolute top-0 left-0 right-0 bottom-0 outline-none cursor-pointer'
+          />
+        </div>
+        <StartTestBtn
+          inputRef={inputRef}
+          setIsStarted={setIsStarted}
+          isStarted={isStarted}
         />
       </div>
-      <div className={`text-white flex flex-col items-center gap-5 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ${isStarted ? 'hidden' : 'block'}`}>
-        <button
-          className='bg-(--blue-600) hover:bg-(--blue-400) py-4 px-6 w-fit rounded-xl cursor-pointer transition-colors duration-150 ease-in-out'
-          onClick={() => {
-            setIsStarted(true)
-            inputRef.current?.focus();
-          }}
-        >
-          Start typing test
-        </button>
-        <p>Or click the text and start typing</p>
-      </div>
-    </div>
-
+      <RestartTestBtn />
+    </>
   )
 }
