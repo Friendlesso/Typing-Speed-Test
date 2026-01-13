@@ -3,7 +3,6 @@ type AccuracyProps = {
 }
 
 export function Accuracy({accuracyNum}:AccuracyProps) {
-  console.log(accuracyNum);
 
  return (
   <div className="border-r-2 border-(--neutral-700) px-3">

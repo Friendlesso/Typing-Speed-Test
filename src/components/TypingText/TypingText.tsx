@@ -74,7 +74,6 @@ export function TypingText({ difficulty, setWpm, setAccuracy }: TypingTextProps)
 
             if (status === 'incorrect') {
               className += ' border-b-2 border-red-400'
-
             }
 
             return (
@@ -87,7 +86,7 @@ export function TypingText({ difficulty, setWpm, setAccuracy }: TypingTextProps)
         </p>
         <input
           type="text"
-          value=""
+          readOnly
           onKeyDown={handleKeyDown}
           className='absolute top-0 left-0 right-0 bottom-0 outline-none'
         />

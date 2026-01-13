@@ -6,6 +6,7 @@ import { TypingHud } from "./components/TypingHUD/TypingHUD";
 function App() {
   const [wpm, setWpm] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
+  const [isStarted, setIsStarted] = useState<boolean>(false)
 
   return (
     <>
@@ -14,6 +15,8 @@ function App() {
         <TypingHud
           wpm={wpm}
           accuracy={accuracy}
+          isStarted={isStarted}
+          setIsStarted={setIsStarted}
         />
         <TypingText
           setWpm={setWpm}
