@@ -67,9 +67,15 @@ export function TypingText({ difficulty, setWpm, setAccuracy }: TypingTextProps)
       <div className='relative'>
         <p className='text-white'>
           {characters.map((char, charIndex) => {
+            const status = charStatus[charIndex];
             let className = getCharClass(charIndex)
 
-            if (charIndex === index) className += 'border-b-2 border-gray-400'
+            if (charIndex === index) className += ' border-b-2 border-gray-400'
+
+            if (status === 'incorrect') {
+              className += ' border-b-2 border-red-400'
+
+            }
 
             return (
               <span key={charIndex} className={className}>
