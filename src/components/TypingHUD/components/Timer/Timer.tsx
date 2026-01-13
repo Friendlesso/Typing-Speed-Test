@@ -28,7 +28,7 @@ export function Timer({time, isStarted, setIsStarted}: TimerProps) {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [isStarted]);
+  }, [isStarted, setIsStarted]);
 
 
  return (
