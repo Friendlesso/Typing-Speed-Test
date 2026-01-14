@@ -9,7 +9,12 @@ export function PersonalBest({ personalBest }: PBProps) {
   return (
     <div className='flex items-center gap-2'>
       <img src={PersonalBestIcon} alt="Personal best icon" />
-      <p className='text-(--neutral-400) text-lg'>Personal best: <span className='text-white'>{personalBest}</span></p>
+      <p className='text-(--neutral-400) text-lg/[120%] tracking-[-0.0375rem]'>
+        Personal best:
+        <span className='text-white pl-1'>
+          {personalBest}
+        </span>
+      </p>
     </div>
   )
 }

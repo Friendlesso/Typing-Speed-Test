@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Header } from "./components/Header/Header"
+import { Header } from "./components/Header"
 import { TypingText } from "./components/TypingText"
 import { TypingHud } from "./components/TypingHUD/TypingHUD";
 
