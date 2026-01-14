@@ -15,11 +15,11 @@ type TypingTextProps = DifficultyProps & {
 
 type CharStatus = 'correct' | 'incorrect';
 
-export function TypingText({ 
-  difficulty, 
-  setWpm, 
-  setAccuracy, 
-  setIsStarted, 
+export function TypingText({
+  difficulty,
+  setWpm,
+  setAccuracy,
+  setIsStarted,
   isStarted,
   setPersonalBest
 }: TypingTextProps) {
@@ -64,7 +64,7 @@ export function TypingText({
 
       // Personal Best Logic
       const prevPB = Number(localStorage.getItem("PB") || 0);
-      if(finalWPM > prevPB) {
+      if (finalWPM > prevPB) {
         localStorage.setItem("PB", String(finalWPM))
         setPersonalBest(finalWPM)
       }
@@ -84,57 +84,61 @@ export function TypingText({
     }
     return '';
   }
+
   return (
     <>
-      <div className='relative'>
-        <div className=
-          {`
+      <div className=
+        {`
           relative 
           flex flex-col items-center 
+          h-[80%]
           ${!isStarted
-              ? 'blur-md'
-              : 'blur-none'
-            }
+            ? 'blur-md'
+            : 'blur-none'
+          }
         `}
-        >
-          <p className='text-white text-[2.5rem] leading-[136%] tracking-[0.4px]'>
-            {characters.map((char, charIndex) => {
-              const status = charStatus[charIndex];
-              let className = getCharClass(charIndex)
+      >
+        <p className='text-white text-[2.5rem] leading-[136%] tracking-[0.4px]'>
+          {characters.map((char, charIndex) => {
+            const status = charStatus[charIndex];
+            let className = getCharClass(charIndex)
 
-              if (charIndex === index) className += ' border-b-2 border-gray-400'
+            if (charIndex === index) className += 'bg-(gray-400) border-b-2 border-gray-400'
 
-              if (status === 'incorrect') {
-                className += ' border-b-2 border-red-400'
-              }
-
-              return (
-                <span key={charIndex} className={className}>
-                  {char}
-                </span>
-              )
+            if (status === 'incorrect') {
+              className += ' border-b-2 border-red-400'
             }
-            )}
-          </p>
-          <input
-            ref={inputRef}
-            type="text"
-            readOnly
-            name='TextInput'
-            onClick={() => {
-              setIsStarted(true)
-            }}
-            onKeyDown={handleKeyDown}
-            className='absolute top-0 left-0 right-0 bottom-0 outline-none cursor-pointer'
-          />
-        </div>
-        <StartTestBtn
-          inputRef={inputRef}
-          setIsStarted={setIsStarted}
-          isStarted={isStarted}
+
+            return (
+              <span key={charIndex} className={className}>
+                {char}
+              </span>
+            )
+          }
+          )}
+        </p>
+        <input
+          ref={inputRef}
+          type="text"
+          readOnly
+          name='TextInput'
+          onClick={() => {
+            setIsStarted(true)
+          }}
+          onKeyDown={handleKeyDown}
+          className='absolute top-0 left-0 right-0 bottom-0 outline-none cursor-pointer'
         />
       </div>
-      <RestartTestBtn />
+      <StartTestBtn
+        inputRef={inputRef}
+        setIsStarted={setIsStarted}
+        isStarted={isStarted}
+      />
+      {isStarted && (
+        <RestartTestBtn
+          setIsStarted={setIsStarted}
+        />
+      )}
     </>
   )
 }

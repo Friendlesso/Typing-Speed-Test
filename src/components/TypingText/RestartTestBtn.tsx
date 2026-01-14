@@ -1,9 +1,20 @@
 import RestartIcon from '../../assets/icons/icon-restart.svg';
 
+type RestartTestBtn = {
+  setIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export function RestartTestBtn() {
+export function RestartTestBtn({ setIsStarted }: RestartTestBtn) {
   return (
-    <div className='w-full border-t-2 border-(--neutral-700) mt-16 flex justify-center'>
+    <div
+      className={`
+        w-full 
+        border-t-2 border-(--neutral-700) 
+        mt-16
+        flex justify-center overflow-hidden
+        transition-all duration-300 ease-in
+      `}
+    >
       <button
         className='
           group
@@ -15,6 +26,9 @@ export function RestartTestBtn() {
           cursor-pointer
           transition-colors duration-200
         '
+        onClick={() => {
+          setIsStarted(false);
+        }}
       >
         Restart Test
         <img className='transition group-hover:invert' src={RestartIcon} alt="Restart test icon" />

@@ -12,7 +12,7 @@ function App() {
   const [isStarted, setIsStarted] = useState<boolean>(false)
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col min-h-[80dvh]">
       <Header
         personalBest={personalBest}
       />
@@ -23,7 +23,7 @@ function App() {
           isStarted={isStarted}
           setIsStarted={setIsStarted}
         />
-        <div>
+        <section className="relative h-[70vh]">
           <TypingText
             setWpm={setWpm}
             setAccuracy={setAccuracy}
@@ -32,7 +32,7 @@ function App() {
             isStarted={isStarted}
             setPersonalBest={setPersonalBest}
           />
-        </div>
+        </section>
       </div>
     </div>
   )
