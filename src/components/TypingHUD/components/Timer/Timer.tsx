@@ -8,28 +8,32 @@ type TimerProps = {
 
 export function Timer({ time, isStarted, setIsStarted }: TimerProps) {
   //  Make it so if time === "Passage" for it to work differently
-  const [timeLeft, setTimeLeft] = useState<number>((Number(time)))
+  const [timeLeft, setTimeLeft] = useState<number>(() => 
+    typeof time === "number" ? time : 0
+  )
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
+
   useEffect(() => {
-    if (!isStarted) return;
+    if (!isStarted || typeof time !== "number") return;
+
+    setTimeout(() => setTimeLeft(time), 0)
 
     const intervalId = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
-          setIsStarted(false);
           clearInterval(intervalId)
-          return 0;
+          setTimeout(() => setIsStarted(false), 0)
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [isStarted, setIsStarted]);
+  }, [isStarted, setIsStarted, time]);
 
 
   return (

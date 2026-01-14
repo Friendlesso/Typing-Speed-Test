@@ -13,7 +13,7 @@ function App() {
   });
   const [accuracy, setAccuracy] = useState(0);
   const [isStarted, setIsStarted] = useState<boolean>(false)
-  const [time, setTime] = useState<TimeDropdownValue>(60)
+  const [time, setTime] = useState<TimeDropdownValue>(15)
   const [difficulty, setDifficulty] = useState<DifficultyValue>(
     defaultDiff && ["Eazy", "Medium", "Hard"].includes(defaultDiff)
       ? defaultDiff
@@ -42,6 +42,7 @@ function App() {
         <section className="relative h-[70vh]">
           <TypingText
             setWpm={setWpm}
+            time={time}
             setAccuracy={setAccuracy}
             difficulty={difficulty}
             setIsStarted={setIsStarted}

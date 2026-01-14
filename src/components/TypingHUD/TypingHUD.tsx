@@ -31,6 +31,7 @@ export function TypingHud({ wpm, accuracy, isStarted, setIsStarted, time, setTim
           isStarted={isStarted}
         />
         <Timer
+          key={typeof time === "number" ? time : "passage"}
           time={time}
           isStarted={isStarted}
           setIsStarted={setIsStarted}
