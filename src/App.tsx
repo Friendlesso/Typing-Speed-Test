@@ -2,6 +2,9 @@ import { useState } from "react"
 import { Header } from "./components/Header"
 import { TypingText } from "./components/TypingText"
 import { TypingHud } from "./components/TypingHUD/TypingHUD";
+import type { DifficultyValue, TimeDropdownValue } from "./features/typingTest/data";
+
+  const defaultDiff = localStorage.getItem("diff") as DifficultyValue | null;
 
 function App() {
   const [wpm, setWpm] = useState(0);
@@ -10,6 +13,16 @@ function App() {
   });
   const [accuracy, setAccuracy] = useState(0);
   const [isStarted, setIsStarted] = useState<boolean>(false)
+  const [time, setTime] = useState<TimeDropdownValue>(60)
+  const [difficulty, setDifficulty] = useState<DifficultyValue>(
+    defaultDiff && ["Eazy", "Medium", "Hard"].includes(defaultDiff)
+      ? defaultDiff
+      : "Eazy"
+  )
+  console.log(difficulty);
+  console.log(time);
+
+
 
   return (
     <div className="flex flex-col min-h-[80dvh]">
@@ -20,6 +33,9 @@ function App() {
         <TypingHud
           wpm={wpm}
           accuracy={accuracy}
+          time={time}
+          setTime={setTime}
+          setDifficulty={setDifficulty}
           isStarted={isStarted}
           setIsStarted={setIsStarted}
         />
@@ -27,7 +43,7 @@ function App() {
           <TypingText
             setWpm={setWpm}
             setAccuracy={setAccuracy}
-            difficulty="easy"
+            difficulty={difficulty}
             setIsStarted={setIsStarted}
             isStarted={isStarted}
             setPersonalBest={setPersonalBest}

@@ -6,6 +6,7 @@ import { StartTestBtn } from './StartTestBtn';
 import { RestartTestBtn } from './RestartTestBtn';
 
 type TypingTextProps = DifficultyProps & {
+  difficulty: string
   setWpm: React.Dispatch<React.SetStateAction<number>>
   setAccuracy: React.Dispatch<React.SetStateAction<number>>
   setIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,6 +35,10 @@ export function TypingText({
   const inputRef = useRef<HTMLInputElement>(null);
   const characters = question.text.split('');
 
+  useEffect(() => {
+    setQuestion(getRandomText(difficulty))
+  }, [difficulty])
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 
     const typedChar = e.key;
@@ -54,6 +59,7 @@ export function TypingText({
     setTotalChar((totalChar) => totalChar + 1);
     setIndex((index) => index + 1);
   }
+
 
   // DEV NOTE: CHANGE THIS LATER TO USE THE ENDING OF THE TEXT OR THE ENDING OF TIME
   useEffect(() => {

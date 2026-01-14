@@ -6,7 +6,7 @@ export type Text = {
 }
 
 export type DifficultyProps = {
-  difficulty: 'easy' | 'medium' | 'hard'
+  difficulty: 'Eazy' | 'Medium' | 'Hard'
 }
 
 

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
 type TimerProps = {
-  time: number;
+  time: number | string;
   isStarted: boolean;
   setIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function Timer({ time, isStarted, setIsStarted }: TimerProps) {
-  const [timeLeft, setTimeLeft] = useState<number>(time)
+  //  Make it so if time === "Passage" for it to work differently
+  const [timeLeft, setTimeLeft] = useState<number>((Number(time)))
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
