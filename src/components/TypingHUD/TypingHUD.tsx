@@ -1,6 +1,5 @@
-import { Accuracy } from "./components/Accuracy";
 import { Timer } from './components/Timer'
-import { WPM } from "./components/WPM";
+import { TypingStats } from "./components/TypingStats";
 
 type TypingHUDProps = {
   wpm: number;
@@ -14,11 +13,17 @@ export function TypingHud({ wpm, accuracy, isStarted, setIsStarted }: TypingHUDP
   return (
     <section className="flex border-b-2 border-(--neutral-700) pb-4">
       <div className="flex">
-        <WPM
-          wpm={wpm}
+        <TypingStats
+          label="WPM"
+          stat={wpm}
+          textColor="text-white"
+          isStarted={isStarted}
         />
-        <Accuracy
-          accuracyNum={accuracy}
+        <TypingStats
+          label="Accuracy"
+          stat={accuracy}
+          textColor="text-(--red-500)"
+          isStarted={isStarted}
         />
         <Timer
           time={60}

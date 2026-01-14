@@ -6,15 +6,15 @@ type TimerProps = {
   setIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function Timer({time, isStarted, setIsStarted}: TimerProps) {
+export function Timer({ time, isStarted, setIsStarted }: TimerProps) {
   const [timeLeft, setTimeLeft] = useState<number>(time)
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
   const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  
+
   useEffect(() => {
-    if(!isStarted) return;
+    if (!isStarted) return;
 
     const intervalId = setInterval(() => {
       setTimeLeft(prev => {
@@ -31,9 +31,13 @@ export function Timer({time, isStarted, setIsStarted}: TimerProps) {
   }, [isStarted, setIsStarted]);
 
 
- return (
-  <div className="border-r-2 border-(--neutral-700) px-3">
-    <p className="text-(--neutral-400) text-xl">Time: <span className="text-(--yellow-400) text-2xl font-bold ml-1">{formattedTime}</span></p>
-  </div>
- )
+  return (
+    <div className="border-r-2 border-(--neutral-700) px-3">
+      <p className="text-(--neutral-400) text-xl">Time:
+        <span className={`${isStarted ? 'text-(--yellow-400)' : 'text-white'} text-2xl font-bold pl-1`}>
+          {formattedTime}
+        </span>
+      </p>
+    </div>
+  )
 }
