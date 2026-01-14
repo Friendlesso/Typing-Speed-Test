@@ -13,6 +13,7 @@
 
   --neutral-400: hsl(240, 1%, 59%);
 
+  --neutral-0: white;
   /* Blue */
   --blue-600: hsl(214, 100%, 55%);
   --blue-400: hsl(210, 100%, 65%);

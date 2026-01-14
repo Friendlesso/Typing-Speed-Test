@@ -9,12 +9,20 @@ type TypingTextProps = DifficultyProps & {
   setWpm: React.Dispatch<React.SetStateAction<number>>
   setAccuracy: React.Dispatch<React.SetStateAction<number>>
   setIsStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  setPersonalBest: React.Dispatch<React.SetStateAction<number>>;
   isStarted: boolean;
 }
 
 type CharStatus = 'correct' | 'incorrect';
 
-export function TypingText({ difficulty, setWpm, setAccuracy, setIsStarted, isStarted }: TypingTextProps) {
+export function TypingText({ 
+  difficulty, 
+  setWpm, 
+  setAccuracy, 
+  setIsStarted, 
+  isStarted,
+  setPersonalBest
+}: TypingTextProps) {
   const [index, setIndex] = useState(0);
   const [correctChar, setCorrectChar] = useState(0);
   const [errors, setErrors] = useState(0);
@@ -50,9 +58,18 @@ export function TypingText({ difficulty, setWpm, setAccuracy, setIsStarted, isSt
   // DEV NOTE: CHANGE THIS LATER TO USE THE ENDING OF THE TEXT OR THE ENDING OF TIME
   useEffect(() => {
     if (characters.length === totalChar) {
-      setWpm(getWPM(totalChar, errors, 0.5));
+      // WPM logic
+      const finalWPM = getWPM(totalChar, errors, 0.5)
+      setWpm(finalWPM);
+
+      // Personal Best Logic
+      const prevPB = Number(localStorage.getItem("PB") || 0);
+      if(finalWPM > prevPB) {
+        localStorage.setItem("PB", String(finalWPM))
+        setPersonalBest(finalWPM)
+      }
     }
-  }, [totalChar, characters.length, errors, setWpm])
+  }, [totalChar, characters.length, errors, setWpm, setPersonalBest])
 
   useEffect(() => {
     setAccuracy(getAccuracy(correctChar, totalChar))
